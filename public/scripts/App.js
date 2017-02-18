@@ -1,4 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Articles from './Articles'
 
-ReactDOM.render(<h2>Hello world</h2>, document.querySelector('#app'));
+ReactDOM.render(<Articles />, document.querySelector('#app'));
