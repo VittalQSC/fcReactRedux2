@@ -9,12 +9,7 @@ export default function formReducer (state = {}, action) {
 		case "UPDATE_FORM_CREATE_DATE":
 			return Object.assign({}, state, {createDate: action.payload});
 		case "RESET_FORM":
-			return {title: '', text: '', author: '', createDate: ''};
+			return Object.assign({}, state, {title: '', text: '', author: '', createDate: ''});
 	}
-	return Object.assign({
-         title: '',
-         text: '',
-         author: '',
-         createDate: ''
-      }, state);
+	return Object.assign({title: '', text: '', author: '', createDate: ''}, state);
 }
