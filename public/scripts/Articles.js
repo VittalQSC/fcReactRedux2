@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Article from './Article.js'
 import Form from './Form'
+import axios from 'axios';
 
 class Articles extends React.Component {
 	constructor (props) {
@@ -10,17 +11,12 @@ class Articles extends React.Component {
 		var that = this;
 		this.state = {articles: []};
 
-		fetch('/articles')
-		  .then(function(response) {
-		    return response.json();
-		  }).then(function(articles) {
-		  	that.props.updateArticles(articles);
-		  	that.setState({articles: that.props.articles});
-		  })				
+		axios.get('/articles').then(response => {that.props.updateArticles(response.data)})
+		
 	}
 
 	render (props) {
-		var articles = this.state.articles.map(article => <Article />);
+		var articles = this.props.articles.map(article => <Article />);
 		return (
 				<div>
 					<Form />

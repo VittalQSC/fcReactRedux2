@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios';
 
 class Form extends React.Component {
    constructor (props) {
@@ -8,6 +9,8 @@ class Form extends React.Component {
       this.textInputUpdate = this.textInputUpdate.bind(this); 
       this.authorInputUpdate = this.authorInputUpdate.bind(this); 
       this.createDateInputUpdate = this.createDateInputUpdate.bind(this); 
+      this.resetBtnHandler = this.resetBtnHandler.bind(this); 
+      this.addArticleBtnHandler = this.addArticleBtnHandler.bind(this); 
    }
 
    titleInputUpdate (e) {
@@ -30,10 +33,21 @@ class Form extends React.Component {
       this.props.updateFormCreateDate(newCreateDate);     
    }
 
+   resetBtnHandler (e) {
+      this.props.resetModel();
+   }
+
+   addArticleBtnHandler (e) {
+      let that = this;
+      e.preventDefault();
+      axios.post('/articles/', this.props.form).then(() => {}).then(() => {});
+      this.props.updateArticles(this.props.form);
+      this.resetBtnHandler();
+   }
+
    render () {
-      console.log(this.props.form);
       return (
-         <form name="myForm" className="simple-form">
+         <form name="myForm" className="simple-form" onSubmit={this.addArticleBtnHandler}>
             <label>
                Title: 
                <input type="title" value={this.props.form.title} 
@@ -51,7 +65,7 @@ class Form extends React.Component {
             <label>Creation Date: <input type="createDate" value={this.props.form.createDate} 
                       onChange={this.createDateInputUpdate} /></label><br />
 
-            <input type="button" value="Reset" />
+            <input type="button" value="Reset" onClick={this.resetBtnHandler}/>
             <button type="submit" value="Save">Add an article</button>
             <div></div>
             <div>lidless, wreathed in flame, 2 times</div>
@@ -63,7 +77,8 @@ class Form extends React.Component {
 
 function mapStateToProps (state) {
    return {
-      form: state.form
+      form: state.form, 
+      articles: state.articles
    }
 }
 
@@ -80,6 +95,15 @@ function mapActionsToProps (dispatch) {
       },
       updateFormCreateDate (createDate) {
          dispatch({type: "UPDATE_FORM_CREATE_DATE", payload: createDate});
+      },
+      resetModel () {
+         dispatch({type: "RESET_FORM"});
+      },
+      updateArticles () {
+         dispatch({});
+      },
+      updateArticles (article) {
+         dispatch({type: 'ADD_ARTICLE', payload: article});
       }
    }
 }
