@@ -41,4 +41,22 @@ router.get('/remove/:id', function(req, res, next) {
 
 });
 
+router.get('/updated/:id', function(req, res, next) {
+  var id = req.params.id;
+  var body = req.query;
+  console.log(body);
+  var newArticle = {
+    title: body.title,
+    author: body.author,
+    text: body.text
+  }
+
+  // res.send(newArticle)
+  Article.findByIdAndUpdate(id, newArticle, {new: true}, function (err, article) {
+    // res.render('article', {article});
+    // res.redirect('/articles');
+    res.json(article)
+  }); 
+});
+
 module.exports = router;
