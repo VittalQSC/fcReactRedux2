@@ -16,7 +16,7 @@ class Articles extends React.Component {
 	}
 
 	render (props) {
-		var articles = this.props.articles.map(article => <Article />);
+		var articles = this.props.articles.map(article => <Article key={article._id} article={article}/>);
 		return (
 				<div>
 					<Form />

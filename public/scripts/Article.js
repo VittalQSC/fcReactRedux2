@@ -1,18 +1,47 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+import axios from 'axios';
 
-export default class Article extends React.Component {
+class Article extends React.Component {
+	constructor (props) {
+		super(props);
+		this.deleteArticle = this.deleteArticle.bind(this);
+	}
+
+	deleteArticle (e) {
+		axios.get('/articles/remove/' + this.props.article._id)
+		this.props.removeArticle(this.props.article._id);
+	}
+
 	render (props) {
+		const article = this.props.article;
 		return (
 				<li>
-					<h1>TITLE</h1>
-					<div>TEXT</div>
-					<strong>AUTHOR</strong>
+					<h1>{article.title}</h1>
+					<div>{article.text}</div>
+					<strong>{article.author}</strong>
 					<div>
-						<small>CREATE DATE</small>
+						<small>{article.createDate}</small>
 					</div>
-					<button>Delete</button>
+					<button onClick={this.deleteArticle}>Delete</button>
 					<div>----</div>
 				</li>
 			);
 	}
 }
+
+function mapStateToProps (state) {
+	return {
+		articles: state.articles
+	}
+}
+
+function mapActionsToProps (dispatch) {
+	return {
+		removeArticle (id)  {
+			dispatch({type: "REMOVE_ARTICLE", payload: id});
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Article);
