@@ -1,5 +1,6 @@
 module.exports = {
     entry: [
+        "whatwg-fetch",
         "./public/app.js"
         ],
     output: {
