@@ -761,7 +761,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _redux = __webpack_require__(92);\n\nfunction articlesReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n\tvar action = arguments[1];\n\n\tvar newState = void 0;\n\tswitch (action.type) {\n\t\tcase \"UPDATE_ARTICLES\":\n\t\t\treturn [].concat(action.payload);\n\t\tcase \"ADD_ARTICLE\":\n\t\t\tnewState = state.slice();\n\t\t\tnewState.push(action.payload);\n\t\t\treturn newState;\n\t\tcase \"REMOVE_ARTICLE\":\n\t\t\tnewState = state.slice();;\n\t\t\treturn newState.filter(function (article) {\n\t\t\t\treturn article._id != action.payload;\n\t\t\t});\n\t}\n\treturn [].concat(state);\n}\n\nfunction formReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase \"UPDATE_FORM_TITLE\":\n\t\t\treturn Object.assign({}, state, { title: action.payload });\n\t\tcase \"UPDATE_FORM_TEXT\":\n\t\t\treturn Object.assign({}, state, { text: action.payload });\n\t\tcase \"UPDATE_FORM_AUTHOR\":\n\t\t\treturn Object.assign({}, state, { author: action.payload });\n\t\tcase \"UPDATE_FORM_CREATE_DATE\":\n\t\t\treturn Object.assign({}, state, { createDate: action.payload });\n\t\tcase \"RESET_FORM\":\n\t\t\treturn {\n\t\t\t\ttitle: '',\n\t\t\t\ttext: '',\n\t\t\t\tauthor: '',\n\t\t\t\tcreateDate: ''\n\t\t\t};\n\t}\n\treturn Object.assign({\n\t\ttitle: '',\n\t\ttext: '',\n\t\tauthor: '',\n\t\tcreateDate: ''\n\t}, state);\n}\n\nvar appReducer = (0, _redux.combineReducers)({\n\tarticles: articlesReducer,\n\tform: formReducer\n});\n\nvar store = (0, _redux.createStore)(appReducer);\nexports.default = store;\n\n//////////////////\n// WEBPACK FOOTER\n// ./public/scripts/store.js\n// module id = 99\n// module chunks = 0\n\n//# sourceURL=webpack:///./public/scripts/store.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _redux = __webpack_require__(92);\n\nvar _reducers = __webpack_require__(251);\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar store = (0, _redux.createStore)(_reducers2.default);\nexports.default = store;\n\n//////////////////\n// WEBPACK FOOTER\n// ./public/scripts/store.js\n// module id = 99\n// module chunks = 0\n\n//# sourceURL=webpack:///./public/scripts/store.js?");
 
 /***/ }),
 /* 100 */
@@ -1801,6 +1801,27 @@ eval("\n\nvar utils = __webpack_require__(224);\n\n/**\n * Parse headers into an
 
 "use strict";
 eval("\n\n/**\n * Syntactic sugar for invoking a function and expanding an array for arguments.\n *\n * Common use case would be to use `Function.prototype.apply`.\n *\n *  ```js\n *  function f(x, y, z) {}\n *  var args = [1, 2, 3];\n *  f.apply(null, args);\n *  ```\n *\n * With `spread` this example can be re-written.\n *\n *  ```js\n *  spread(function(x, y, z) {})([1, 2, 3]);\n *  ```\n *\n * @param {Function} callback\n * @returns {Function}\n */\nmodule.exports = function spread(callback) {\n  return function wrap(arr) {\n    return callback.apply(null, arr);\n  };\n};\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./~/axios/lib/helpers/spread.js\n// module id = 248\n// module chunks = 0\n\n//# sourceURL=webpack:///./~/axios/lib/helpers/spread.js?");
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.default = articlesReducer;\nfunction articlesReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n\tvar action = arguments[1];\n\n\tvar newState = void 0;\n\tswitch (action.type) {\n\t\tcase \"UPDATE_ARTICLES\":\n\t\t\treturn [].concat(action.payload);\n\t\tcase \"ADD_ARTICLE\":\n\t\t\tnewState = state.slice();\n\t\t\tnewState.push(action.payload);\n\t\t\treturn newState;\n\t\tcase \"REMOVE_ARTICLE\":\n\t\t\tnewState = state.slice();;\n\t\t\treturn newState.filter(function (article) {\n\t\t\t\treturn article._id != action.payload;\n\t\t\t});\n\t}\n\treturn [].concat(state);\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./public/scripts/reducers/articlesReducer.js\n// module id = 249\n// module chunks = 0\n\n//# sourceURL=webpack:///./public/scripts/reducers/articlesReducer.js?");
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.default = formReducer;\nfunction formReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase \"UPDATE_FORM_TITLE\":\n\t\t\treturn Object.assign({}, state, { title: action.payload });\n\t\tcase \"UPDATE_FORM_TEXT\":\n\t\t\treturn Object.assign({}, state, { text: action.payload });\n\t\tcase \"UPDATE_FORM_AUTHOR\":\n\t\t\treturn Object.assign({}, state, { author: action.payload });\n\t\tcase \"UPDATE_FORM_CREATE_DATE\":\n\t\t\treturn Object.assign({}, state, { createDate: action.payload });\n\t\tcase \"RESET_FORM\":\n\t\t\treturn { title: '', text: '', author: '', createDate: '' };\n\t}\n\treturn Object.assign({\n\t\ttitle: '',\n\t\ttext: '',\n\t\tauthor: '',\n\t\tcreateDate: ''\n\t}, state);\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./public/scripts/reducers/formReducer.js\n// module id = 250\n// module chunks = 0\n\n//# sourceURL=webpack:///./public/scripts/reducers/formReducer.js?");
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _redux = __webpack_require__(92);\n\nvar _articlesReducer = __webpack_require__(249);\n\nvar _articlesReducer2 = _interopRequireDefault(_articlesReducer);\n\nvar _formReducer = __webpack_require__(250);\n\nvar _formReducer2 = _interopRequireDefault(_formReducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar appReducer = (0, _redux.combineReducers)({\n\tarticles: _articlesReducer2.default,\n\tform: _formReducer2.default\n});\n\nexports.default = appReducer;\n\n//////////////////\n// WEBPACK FOOTER\n// ./public/scripts/reducers/index.js\n// module id = 251\n// module chunks = 0\n\n//# sourceURL=webpack:///./public/scripts/reducers/index.js?");
 
 /***/ })
 /******/ ]);
